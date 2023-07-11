@@ -1,0 +1,17 @@
+<div *ngIf="isStpper">
+    <!-- <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)"></p-steps> -->
+    <p-steps [model]="items" [activeIndex]="activeIndex" [readonly]="false"></p-steps>
+ 
+</div>
+
+<div *ngIf="formConfig && scopeSelection">
+    <app-forms [config]="formConfig" [options]="options"></app-forms>
+</div>
+
+<div *ngIf="formConfigBasic && basicSelection">
+    <app-forms [config]="formConfigBasic" [options]="options"></app-forms>
+</div>
+
+<div *ngIf="formConfigVehicleAndDriver && vehicleAndDriverSelection">
+    <app-forms [config]="formConfigVehicleAndDriver" [options]="options"></app-forms>
+</div>
