@@ -1,17 +1,15 @@
 <div *ngIf="isStpper">
-    <!-- <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)"></p-steps> -->
     <p-steps [model]="items" [activeIndex]="activeIndex" [readonly]="false"></p-steps>
- 
 </div>
 
-<div *ngIf="formConfig && scopeSelection">
-    <app-forms [config]="formConfig" [options]="options"></app-forms>
+<div *ngIf="currentStep == 'select_scope_package'">
+    <app-scope-package (createFn)="createFn($event)" [otherData]="otherData"></app-scope-package>
 </div>
 
-<div *ngIf="formConfigBasic && basicSelection">
-    <app-forms [config]="formConfigBasic" [options]="options"></app-forms>
+<div *ngIf="currentStep == 'basic_info'">
+    <app-basic-information (createFn)="createFn($event)" [otherData]="otherData"></app-basic-information>
 </div>
 
-<div *ngIf="formConfigVehicleAndDriver && vehicleAndDriverSelection">
-    <app-forms [config]="formConfigVehicleAndDriver" [options]="options"></app-forms>
+<div *ngIf="currentStep == 'vehicle_and_driver'">
+    <app-vehicle-and-driver-selection (createFn)="createFn($event)" [otherData]="otherData"></app-vehicle-and-driver-selection>
 </div>

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthServiceService } from '../services/auth-service.service';
 
 const token: any = localStorage.getItem("token")
 const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -9,36 +10,38 @@ const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 })
 
 export class BookingService {
-  private apiUrl = "https://beta-b.wj-fulcrum.co.uk/apiv1"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthServiceService
+    ) { }
 
-  getScopePackage(booking_id: any, scope_package_id: any) {
-    return this.http.get(`${this.apiUrl}/booking/wizard/select_scope_package?booking_id=${booking_id}&scope_package_id=${scope_package_id}`, { headers: headers });
+  getScopePackage(data: any) {
+    return this.http.get(`/booking/wizard/select_scope_package${this.authService.getQueryparams(data)}`);
   }
 
   createScopePackage(body: any) {
-    return this.http.post(`${this.apiUrl}/booking/wizard/select_scope_package`, body, { headers: headers });
+    return this.http.post(`/booking/wizard/select_scope_package`, body);
   }
 
-  getBasicInfo(booking_id: any, scope_package_id: any) {
-    return this.http.get(`${this.apiUrl}/booking/wizard/basic_info?booking_id=${booking_id}&scope_package_id=${scope_package_id}`, { headers: headers });
+  getBasicInfo(data: any) {
+    return this.http.get(`/booking/wizard/basic_info${this.authService.getQueryparams(data)}`);
   }
 
   getzones(body: any) {
-    return this.http.post(`${this.apiUrl}/booking/wizard/cmd/get.zones.info`, body, { headers: headers });
+    return this.http.post(`/booking/wizard/cmd/get.zones.info`, body);
   }
 
   createBasicInfo(body: any) {
-    return this.http.post(`${this.apiUrl}/booking/wizard/basic_info`, body, { headers: headers });
+    return this.http.post(`/booking/wizard/basic_info`, body);
   }
 
-  getVehicleAndDriver(booking_id: any) {
-    return this.http.get(`${this.apiUrl}/booking/wizard/vehicle_and_driver?booking_id=${booking_id}`, { headers: headers });
+  getVehicleAndDriver(data: any) {
+    return this.http.get(`/booking/wizard/vehicle_and_driver${this.authService.getQueryparams(data)}`);
   }
 
   createVehicleAndDriver(body: any) {
-    return this.http.post(`${this.apiUrl}/booking/wizard/vehicle_and_driver`, body, { headers: headers });
+    return this.http.post(`/booking/wizard/vehicle_and_driver`, body);
   }
   
 

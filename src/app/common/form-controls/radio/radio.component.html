@@ -1,0 +1,15 @@
+<form [formGroup]="filterForm">
+    <label [for]="field?.field" class="block">{{field?.label}} : </label>
+    <div *ngFor="let radio of options[field?.field] | keyvalue">
+        <input type="radio" [name]="field?.field" [formControlName]="field?.field" [value]="radio.value"
+            [required]="field?.required">
+        <label [for]="field?.field" class="block">{{radio.key}}</label>
+    </div>
+
+    <small *ngIf="filterForm.get(field?.field)?.touched" class="p-error block">
+        <span *ngIf="filterForm.get(field?.field)?.hasError('invalid')">{{field?.label}} is
+            invalid</span>
+        <span *ngIf="filterForm.get(field?.field)?.hasError('required')">{{field?.label}} is
+            required</span>
+    </small>
+</form>

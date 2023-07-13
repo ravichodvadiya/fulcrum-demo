@@ -1,0 +1,44 @@
+<h2 *ngIf="!config.isStpper">{{config.title}}</h2>
+<div class="">
+    <form [formGroup]="filterForm">
+        <ng-container *ngFor="let field of config.fields">
+            <div class="field col-4 form-group" [ngClass]="field?.col || 'md:col-4'"
+                *ngIf="field.type == 'select' && field.multiple == true && field.hidden == false && field?.field != 'scope_package_id' && field?.field == 'vehicle_emission_category'">
+                <app-multi-select [filterForm]="filterForm" [field]="field" [options]="options"></app-multi-select>
+            </div>
+
+            <div class="field col-4 form-group" style="margin-bottom: 8px"
+                *ngIf="field.type == 'select' && field.hidden == false && field?.field != 'delivery_or_collection' && field?.field != 'vehicle_emission_category'">
+                <app-select [filterForm]="filterForm" [field]="field" [options]="options"></app-select>
+            </div>
+
+            <div class="field col-4 form-group" style="margin-bottom: 8px"
+                *ngIf="field.type == 'text' && field.hidden == false">
+                <app-input [filterForm]="filterForm" [field]="field"></app-input>
+            </div>
+
+            <div class="field col-4 form-group" style="margin-bottom: 8px"
+                *ngIf="field.type == 'password' && field.hidden == false">
+                <app-password [filterForm]="filterForm" [field]="field"></app-password>
+            </div>
+
+            <div class="field col-4" style="margin-bottom: 8px" [ngClass]="field?.col || 'md:col-4'"
+                *ngIf="field.type == 'checkbox'">
+                <app-checkbox [filterForm]="filterForm" [field]="field"></app-checkbox>
+            </div>
+
+            <div class="field col-4 form-group" style="margin-bottom: 8px" [ngClass]="field?.col || 'md:col-4'"
+                *ngIf="field.type == 'select' && field.hidden == false && field?.field == 'delivery_or_collection'">
+                <app-radio [filterForm]="filterForm" [field]="field" [options]="options"></app-radio>
+            </div>
+
+        </ng-container>
+        <div *ngIf="config.isSingleButton == false">
+            <p-button *ngIf="config.isStpper" (click)="previous()" [label]="config.buttonText"></p-button>
+            <p-button [label]="config.buttonTextTwo" (click)="createEvent()"></p-button>
+        </div>
+        <div *ngIf="config.isSingleButton">
+            <p-button [label]="config.buttonText" (click)="createEvent()"></p-button>
+        </div>
+    </form>
+</div>

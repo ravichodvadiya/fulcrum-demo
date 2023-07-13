@@ -1,0 +1,14 @@
+<form [formGroup]="filterForm">
+    <label [for]="field?.field" class="block">{{field?.label}} : </label>
+    <p-multiSelect [inputId]="field?.field" [options]="field?.options" styleClass=" w-full"
+        [formControlName]="field?.field" [defaultLabel]="field.placeholder" selectedItemsLabel="{0} items selected"
+        [optionLabel]="field?.optionLabel || 'name'" [optionValue]="field?.optionValue || 'id'" appendTo="body"
+        [disabled]="field.disabled" [required]="field?.required">
+    </p-multiSelect>
+    <small *ngIf="filterForm.get(field?.field)?.touched" class="p-error block">
+        <span *ngIf="filterForm.get(field?.field)?.hasError('invalid')">{{field?.label}} is
+            invalid</span>
+        <span *ngIf="filterForm.get(field?.field)?.hasError('required')">{{field?.label}} is
+            required</span>
+    </small>
+</form>

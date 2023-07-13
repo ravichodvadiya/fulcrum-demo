@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '../material.module';
+import { PrimengModule } from '../primeng.module';
+import { FormControlsModule } from '../common/form-controls/form-controls.module';
 
 
 @NgModule({
@@ -14,8 +15,9 @@ import { MaterialModule } from '../material.module';
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule,
-    AuthenticationRoutingModule
+    PrimengModule,
+    AuthenticationRoutingModule,
+    FormControlsModule
   ]
 })
 export class AuthenticationModule { }
